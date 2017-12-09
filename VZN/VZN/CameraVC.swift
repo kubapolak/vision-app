@@ -11,6 +11,11 @@ import AVFoundation
 import CoreML
 import Vision
 
+enum FlashState {
+    case off
+    case on
+}
+
 class CameraVC: UIViewController {
 
     var captureSession: AVCaptureSession!
@@ -18,6 +23,7 @@ class CameraVC: UIViewController {
     var previewLayer: AVCaptureVideoPreviewLayer!
     
     var photoData: Data?
+    var flashControlState: FlashState = .off
     
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var roundedLblView: RoundedShadowView!
@@ -76,6 +82,12 @@ class CameraVC: UIViewController {
 //        let previewFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPixelType, kCVPixelBufferWidthKey as String: 160, kCVPixelBufferHeightKey as String: 160]
 //        settings.previewPhotoFormat = previewFormat
         
+        if flashControlState == .off {
+            settings.flashMode = .off
+        } else {
+            settings.flashMode = .on
+        }
+        
         cameraOutput.capturePhoto(with: settings, delegate: self)
     }
     
@@ -93,6 +105,17 @@ class CameraVC: UIViewController {
             }
         }
     }
+    
+    @IBAction func flashButtonPressed(_ sender: Any) {
+        switch flashControlState {
+        case .off:
+            flashBtn.setTitle("flash on", for: .normal)
+            flashControlState = .on
+        case .on:
+            flashBtn.setTitle("flash off", for: .normal)
+            flashControlState = .off
+        }
+    }
 }
 
 extension CameraVC: AVCapturePhotoCaptureDelegate {
@@ -101,7 +124,6 @@ extension CameraVC: AVCapturePhotoCaptureDelegate {
             debugPrint(error)
         } else {
             photoData = photo.fileDataRepresentation()
-            
             do {
                 let model = try VNCoreMLModel(for: SqueezeNet().model)
                 let request = VNCoreMLRequest(model: model, completionHandler: resultsMethod)
@@ -110,7 +132,6 @@ extension CameraVC: AVCapturePhotoCaptureDelegate {
             } catch {
                 debugPrint(error)
             }
-            
             let image = UIImage(data: photoData!)
             self.captureImgView.image = image
         }
