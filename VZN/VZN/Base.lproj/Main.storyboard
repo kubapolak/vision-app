@@ -78,6 +78,10 @@
                                     <constraint firstAttribute="width" constant="100" id="aFk-D5-Wwb"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Elb-5y-6b2">
+                                <rect key="frame" x="305" y="653" width="20" height="20"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -87,7 +91,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QsO-mK-DSu" secondAttribute="bottom" constant="10" id="GJZ-B3-6CB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kZn-fN-pYV" secondAttribute="bottom" constant="10" id="JZe-lJ-ue5"/>
                             <constraint firstItem="r0o-4n-PdI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="M0k-Xe-VN4"/>
+                            <constraint firstItem="Elb-5y-6b2" firstAttribute="centerY" secondItem="kZn-fN-pYV" secondAttribute="centerY" id="QV9-4E-Gj1"/>
                             <constraint firstItem="pW2-tY-pSt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="YGc-dB-9Gt"/>
+                            <constraint firstItem="Elb-5y-6b2" firstAttribute="centerX" secondItem="kZn-fN-pYV" secondAttribute="centerX" id="b8l-5D-JpB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pW2-tY-pSt" secondAttribute="trailing" constant="10" id="efg-Ak-XRG"/>
                             <constraint firstItem="QsO-mK-DSu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="esx-Im-bOZ"/>
                             <constraint firstAttribute="bottom" secondItem="r0o-4n-PdI" secondAttribute="bottom" id="meL-jG-rsX"/>
@@ -96,6 +102,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activitySpinner" destination="Elb-5y-6b2" id="sZp-ao-WTj"/>
                         <outlet property="cameraView" destination="r0o-4n-PdI" id="GGG-7c-oFd"/>
                         <outlet property="captureImgView" destination="kZn-fN-pYV" id="Xqr-IR-3aS"/>
                         <outlet property="crtntLbl" destination="3mm-KN-8nO" id="RTj-yg-4Ip"/>
